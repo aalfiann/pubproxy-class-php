@@ -1,7 +1,7 @@
 {
     "name": "aalfiann/pubproxy-class-php",
-    "description": "Get working public proxy list for free by PubProxy.",
-    "keywords": ["proxy","anonymous","elite"],
+    "description": "Get working public proxy list for free by PubProxy (No API key required).",
+    "keywords": ["proxy","anonymous","elite","free-proxy","scan-proxy","public-proxy","socks-proxy","http-proxy","proxy-list"],
     "authors": [
         {
             "name": "M ABD AZIZ ALFIAN",
