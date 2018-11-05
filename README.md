@@ -20,6 +20,7 @@ composer require "aalfiann/pubproxy-class-php:^1.0"
 ```php
 require_once ('vendor/autoload.php');
 use \aalfiann\PubProxy;
+
 $proxy = new PubProxy;
 echo $proxy->make()->getProxy();
 ```
