@@ -40,10 +40,12 @@ namespace aalfiann;
          * 
          * @var refresh = This will cache the proxy. Default is 1800 seconds (every 30minutes proxy will refresh automatically).
          * @var filepath = To create custom file cache. Default is "cache-proxy/{{md5}}.cache".
+         * @var proxy = Send request with proxy to PubProxy.
+         * @var proxyauth = Is the proxy authentication or credentials.
          * @var response = Is the temporary json proxy variable.
          * @var resultArray = Is the data array converted from response.
          */
-        var $refresh=1800,$filepath='',$response,$resultArray=null;
+        var $refresh=1800,$filepath='',$proxy='',$proxyauth='',$response,$resultArray=null;
 
         /**
          * Set Limit
@@ -288,7 +290,7 @@ namespace aalfiann;
 
         /**
          * Set Refresh
-         * @param refresh = This will cache the proxy. Default is 1800 seconds (every 10minutes proxy will refresh automatically).
+         * @param refresh = This will cache the proxy. Default is 1800 seconds (every 30minutes proxy will refresh automatically).
          * @return this
          */
         public function setRefresh($refresh=1800){
@@ -354,6 +356,8 @@ namespace aalfiann;
                 curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                if (!empty($this->proxy)) curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
+                if (!empty($this->proxyauth)) curl_setopt($ch, CURLOPT_PROXYUSERPWD, $this->proxyauth);
                 // Execute post
                 $result = curl_exec($ch);
                 // Close connection

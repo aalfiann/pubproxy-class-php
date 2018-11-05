@@ -1,6 +1,6 @@
 # PubProxy Class PHP
 
-[![Version](https://img.shields.io/badge/stable-1.0.1-green.svg)](https://github.com/aalfiann/pubproxy-class-php)
+[![Version](https://img.shields.io/badge/stable-1.1.0-green.svg)](https://github.com/aalfiann/pubproxy-class-php)
 [![Total Downloads](https://poser.pugx.org/aalfiann/pubproxy-class-php/downloads)](https://packagist.org/packages/aalfiann/pubproxy-class-php)
 [![License](https://poser.pugx.org/aalfiann/pubproxy-class-php/license)](https://github.com/aalfiann/pubproxy-class-php/blob/HEAD/LICENSE.md)
 
@@ -68,7 +68,7 @@ echo $proxy->setLevel('elite')->setType('http')->setCountry('us')->make()->getJs
 -  `$api='',$level='',$type='',$country='',$not_country='',$port='',$google='',$https='',$post='',$user_agent='',$cookies='',$referer='',$limit=20,$last_check=0,$speed=0;`
 
 ## Properties Feature
-- `$refresh=1800,$filepath='',$response,$resultArray=null;`
+- `$refresh=1800,$filepath='',$proxy='',$proxyauth='',$response,$resultArray=null;`
 
 ## Chain Function
 - **setApi($api='')** this will make your request realtime and unlimited by buying **PubProxy Premium**.
