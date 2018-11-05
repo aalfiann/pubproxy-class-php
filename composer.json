@@ -1,0 +1,25 @@
+{
+    "name": "aalfiann/pubproxy-class-php",
+    "description": "Get working public proxy list for free by PubProxy.",
+    "keywords": ["proxy","anonymous","elite"],
+    "authors": [
+        {
+            "name": "M ABD AZIZ ALFIAN",
+            "email": "aalfiann@gmail.com",
+            "homepage": "https://github.com/aalfiann",
+            "role": "Developer"
+        }
+    ],
+    "type": "library",
+    "require": {
+        "php": ">=5.4"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "aalfiann\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
