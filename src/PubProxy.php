@@ -20,7 +20,7 @@ namespace aalfiann;
          * @var type = Proxy protocol (socks4, socks5 and http).
          * @var last_check = Minutes the proxy was last checked (1-1000).
          * @var speed = How many seconds it takes for the proxy to connect (1-60 in seconds).
-         * @var limit = How many proxies to list. Default is 20.
+         * @var limit = How many proxies to list. Default is 5.
          * @var country = Country of the proxy (input multiple with separated commas).
          * @var not_country = Avoid proxy countries (input multiple with separated commas).
          * @var port = Proxies with a specific port (input multiple with separated commas).
@@ -33,29 +33,28 @@ namespace aalfiann;
          */
         var $api='',$level='',$type='',$country='',$not_country='',$port='',
             $google='',$https='',$post='',$user_agent='',$cookies='',$referer='',
-            $limit=20,$last_check=0,$speed=0;
+            $limit=5,$last_check=0,$speed=0;
 
         /**
          * Feature options
          * 
          * @var refresh = This will cache the proxy. Default is 1800 seconds (every 30minutes proxy will refresh automatically).
+         * @var dircache = To set directory location without change the default filename cache. Default is "cache-proxy".
          * @var filepath = To create custom file cache. Default is "cache-proxy/{{md5}}.cache".
-         * @var proxy = Send request with proxy to PubProxy.
-         * @var proxyauth = Is the proxy authentication or credentials.
          * @var response = Is the temporary json proxy variable.
          * @var resultArray = Is the data array converted from response.
          */
-        var $refresh=1800,$filepath='',$proxy='',$proxyauth='',$response,$resultArray=null;
+        var $refresh=1800,$dircache='',$filepath='',$response,$resultArray=null;
 
         /**
          * Set Limit
-         * @param limit = The limit number to show proxies from PubProxy. Default is 20.
+         * @param limit = The limit number to show proxies from PubProxy. Default is 5.
          * @return this
          */
-        public function setLimit($limit=20){
+        public function setLimit($limit=5){
             if(!empty($limit)) {
                 if ($limit < 1) $limit = 1;
-                if ($limit > 20) $limit = 20;
+                if ($limit > 5) $limit = 5;
                 $this->limit = $limit;
             }
             return $this;
@@ -290,11 +289,21 @@ namespace aalfiann;
 
         /**
          * Set Refresh
-         * @param refresh = This will cache the proxy. Default is 1800 seconds (every 30minutes proxy will refresh automatically).
+         * @param refresh = This will cache the proxy. Default is 1800 seconds (every 10minutes proxy will refresh automatically).
          * @return this
          */
         public function setRefresh($refresh=1800){
             if(!empty($refresh)) $this->refresh = $refresh;
+            return $this;
+        }
+
+        /**
+         * Set Dir Cache
+         * @param dircache = To set directory location without change the default filename cache. Default is "cache-proxy".
+         * @return this
+         */
+        public function setDirCache($dircache=''){
+            if(!empty($dircache)) $this->dircache = rtrim($dircache,'/');
             return $this;
         }
 
@@ -304,7 +313,7 @@ namespace aalfiann;
          * @return this
          */
         public function setFilepath($filepath=''){
-            if(!empty($filepath)) $this->filepath = $filepath;
+            if(!empty($filepath)) $this->filepath = rtrim($filepath,'/');
             return $this;
         }
 
@@ -337,6 +346,9 @@ namespace aalfiann;
          */
         public function getFilepath(){
             if (!empty($this->filepath)) return strtolower($this->filepath);
+            if (!empty($this->dircache)) {
+                return $this->dircache.DIRECTORY_SEPARATOR.strtolower(md5($this->getUrl())).'.cache';    
+            }
             return 'cache-proxy'.DIRECTORY_SEPARATOR.strtolower(md5($this->getUrl())).'.cache';
         }
 
@@ -356,8 +368,6 @@ namespace aalfiann;
                 curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-                if (!empty($this->proxy)) curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
-                if (!empty($this->proxyauth)) curl_setopt($ch, CURLOPT_PROXYUSERPWD, $this->proxyauth);
                 // Execute post
                 $result = curl_exec($ch);
                 // Close connection
@@ -407,7 +417,7 @@ namespace aalfiann;
 
         /**
          * Get single proxy (ip:port)
-         * Note: This also make proxy rotate automatically, so set limit to 20 to get best performance.
+         * Note: This also make proxy rotate automatically, so set limit to 5 to get best performance.
          * @return string
          */
         public function getProxy(){

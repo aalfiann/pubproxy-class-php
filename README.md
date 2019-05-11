@@ -1,13 +1,13 @@
 # PubProxy Class PHP
 
-[![Version](https://img.shields.io/badge/stable-1.1.0-green.svg)](https://github.com/aalfiann/pubproxy-class-php)
-[![Total Downloads](https://poser.pugx.org/aalfiann/pubproxy-class-php/downloads)](https://packagist.org/packages/aalfiann/pubproxy-class-php)
-[![License](https://poser.pugx.org/aalfiann/pubproxy-class-php/license)](https://github.com/aalfiann/pubproxy-class-php/blob/HEAD/LICENSE.md)
+[![Version](https://img.shields.io/packagist/v/aalfiann/pubproxy-class-php.svg)](https://github.com/aalfiann/pubproxy-class-php)
+[![Downloads](https://img.shields.io/packagist/dt/aalfiann/pubproxy-class-php.svg)](https://packagist.org/packages/aalfiann/pubproxy-class-php)
+[![License](https://img.shields.io/packagist/l/aalfiann/pubproxy-class-php.svg)](https://github.com/aalfiann/pubproxy-class-php/blob/HEAD/LICENSE.md)
 
 Get working public proxy list for free by PubProxy (No API key required).
 
 ## Known Limitations
-As free user, there is only 100 request a day. So we cached the request per 30minutes to save your quota.  
+As free user, there is only 50 request a day. So we cached the request per 30minutes to save your quota.  
 We recommend you to buy the premium proxy to get the best experience, realtime and unlimited.
 
 ## Installation
@@ -65,14 +65,14 @@ echo $proxy->setLevel('elite')->setType('http')->setCountry('us')->make()->getJs
 ```
 
 ## Properties PubProxy
--  `$api='',$level='',$type='',$country='',$not_country='',$port='',$google='',$https='',$post='',$user_agent='',$cookies='',$referer='',$limit=20,$last_check=0,$speed=0;`
+-  `$api='',$level='',$type='',$country='',$not_country='',$port='',$google='',$https='',$post='',$user_agent='',$cookies='',$referer='',$limit=5,$last_check=0,$speed=0;`
 
 ## Properties Feature
-- `$refresh=1800,$filepath='',$proxy='',$proxyauth='',$response,$resultArray=null;`
+- `$refresh=1800,$dircache='',$filepath='',$proxy='',$proxyauth='',$response,$resultArray=null;`
 
 ## Chain Function
 - **setApi($api='')** this will make your request realtime and unlimited by buying **PubProxy Premium**.
-- **setLimit($limit=20)** this will display proxies by limit number. Default is 20.
+- **setLimit($limit=5)** this will display proxies by limit number. Default is 5.
 - **setType($type='')** this will display proxies by proxy protocol (socks4, socks5 and http).
 - **setLevel($level='')** this will display proxies by anonymity level (anonymous and elite).
 - **setLastCheck($last_check=0)** this will display proxies which is how long minutes the proxy was last checked?
@@ -87,6 +87,7 @@ echo $proxy->setLevel('elite')->setType('http')->setCountry('us')->make()->getJs
 - **setCookies($cookies='')** this will display proxies which is supports COOKIES request.
 - **setReferer($referer='')** this will display proxies which is supports REFERER request.
 - **setRefresh($refresh=1800)** this will cache the proxy. Default is 1800 seconds (every 30minutes proxy will refresh automatically).
+- **setDirCache($dircache='')** this will set directory location without change the default filename cache. Default is "cache-proxy".
 - **setFilepath($filepath='')** this will create custom file cache. Default is "cache-proxy/{{md5}}.cache".
 
 ## Main Function
